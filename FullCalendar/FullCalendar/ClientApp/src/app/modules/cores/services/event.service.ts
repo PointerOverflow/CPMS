@@ -62,22 +62,40 @@ export class EventService {
     // }];
 
     let data: any = [{
-      title: 'All Day Event',
+      code: '610000004031',
+      title: '610000004031 \n 2W - ME Peeker & Slicer Zone(P12)',
+      description: '2W - ME Peeker & Slicer Zone(P12)',
       start: yearMonth + '-02',
       color: 'red'
     },
     {
-      title: 'Long Event',
-      start: yearMonth + '-07'
+      code: '342257',
+      title: '342257 \n 1W - ME Flavoring Zone(P17)',
+      description: '1W - ME Flavoring Zone(P17)',
+      start: yearMonth + '-07',
+      color: 'green',
+      editable: false
     },
     {
-      title: 'Conference',
-      start: yearMonth + '-11'
+      code: '610000004023',
+      title: '610000004023 \n 6M - ME Potato Loading Zone(P10)',
+      description: '6M - ME Potato Loading Zone(P10)',
+      start: yearMonth + '-11',
+      color: '#007bff'
     },
     {
-      title: 'Click for Google',
-      url: 'http://google.com/',
-      start: yearMonth + '-28'
+      code: '342257',
+      title: '342257 \n 1W - ME Flavoring Zone(P17)',
+      description: '1W - ME Flavoring Zone(P17)',
+      start: yearMonth + '-28',
+      color: '#007bff'
+    },
+    {
+      code: '610000004068',
+      title: '610000004068 \n 1W - ME Fryer Zone(P15)',
+      description: '1W - ME Fryer Zone(P15)',
+      start: yearMonth + '-28',
+      color: '#007bff'
     }];
 
     return Observable.of(data);

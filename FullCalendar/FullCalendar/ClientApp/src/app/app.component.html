@@ -1,16 +1,170 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Calendar
+    <!-- Welcome to {{ title }}! -->
   </h1>
 </div>
-<p>Display event : {{displayEvent | json}}</p>
+<!-- <p>Display event : {{displayEvent | json}}</p> -->
 <div *ngIf="calendarOptions">
-    <ng-fullcalendar #ucCalendar 
-        [options]="calendarOptions" 
-        (eventClick)="eventClick($event.detail)" 
-        (eventDrop)="updateEvent($event.detail)"
-        (eventResize)="updateEvent($event.detail)" 
-        (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
-</div>
+  <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+    (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)">
+  </ng-fullcalendar>
 
+  <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-child-name" class="modal-title pull-left">Information</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <tabset>
+            <tab heading="Task" id="task-tab" class="tab-detail">
+              <p [innerHtml]="selectedTask"></p>
+            </tab>
+            <tab heading="Planning" id="plan-tab" class="tab-detail">
+              <form>
+                <div class="form-group row">
+                  <label for="plan-1" class="col-sm-3 col-form-label">Plan Work Center 1</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-2" class="col-sm-3 col-form-label">Plan Work Center 2</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-2">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-3" class="col-sm-3 col-form-label">Plan Work Center 3</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-3">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-4" class="col-sm-3 col-form-label">Plan Work Center 4</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-4">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-5" class="col-sm-3 col-form-label">Plan Work Center 5</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-5">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-6" class="col-sm-3 col-form-label">Plan Work Center 6</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="plan-6">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="plan-time" class="col-sm-2 col-form-label">Plan Time</label>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <input type="text" class="form-control time" id="plan-time" value="">
+                      <span class="white-space">:</span>
+                      <input type="text" class="form-control time" id="plan-time" value="">
+                      <span class="white-space">-</span>
+                      <input type="text" class="form-control time" id="plan-time" value="">
+                      <span class="white-space">:</span>
+                      <input type="text" class="form-control time" id="plan-time" value="">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="comment" class="col-form-label">Comment</label>
+                  <textarea class="form-control" id="comment" value=""></textarea>
+                </div>
+
+                <div class="btn-groups">
+                  <button type="button" class="btn btn-primary" (click)="hideChildModal()">Save</button>
+                  <button type="button" class="btn btn-primary" (click)="hideChildModal()">Cancel</button>
+                </div>
+              </form>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div bsModal #reasonModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-reason-name">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-child-name" class="modal-title pull-left">Reason</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideReasonModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group row">
+                <label for="reason-code" class="col-sm-3 col-form-label"><b>Reason Code</b></label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="reason-code">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="comment" class="col-form-label">Comment</label>
+                <textarea class="form-control" id="comment" value=""></textarea>
+              </div>
+
+              <div class="btn-groups">
+                <button type="button" class="btn btn-primary" (click)="hideReasonModal()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="hideReasonModal()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

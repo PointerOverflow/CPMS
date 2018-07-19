@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+
+import { ModalDirective } from 'ngx-bootstrap/modal';
+
 import { EventService } from './modules/cores/services';
+import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +13,21 @@ import { EventService } from './modules/cores/services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild('childModal') childModal: ModalDirective;
+  @ViewChild('reasonModal') reasonModal: ModalDirective;
+
   title = 'Calendar';
   calendarOptions: Options;
   displayEvent: any;
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventService) { }
+  selectedTask = '';
+
+  constructor(
+    protected eventService: EventService
+  ) {
+    setTheme('bs4');
+  }
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(data => {
@@ -33,7 +47,12 @@ export class AppComponent implements OnInit {
     this.displayEvent = model;
   }
   eventClick(model: any) {
-    console.log('modal');
+    this.showChildModal();
+    
+    this.selectedTask = `<b>Maintenance Plan</b>: ${model.event.code}<br>
+                         <b>PM Task detail:</b><br>
+                         ${model.event.description}`;
+
     model = {
       event: {
         id: model.event.id,
@@ -48,6 +67,7 @@ export class AppComponent implements OnInit {
     this.displayEvent = model;
   }
   updateEvent(model: any) {
+    this.showReasonModal();
     model = {
       event: {
         id: model.event.id,
@@ -61,5 +81,21 @@ export class AppComponent implements OnInit {
       }
     }
     this.displayEvent = model;
+  }
+
+  showChildModal(): void {
+    this.childModal.show();
+  }
+ 
+  hideChildModal(): void {
+    this.childModal.hide();
+  }
+
+  showReasonModal(): void {
+    this.reasonModal.show();
+  }
+ 
+  hideReasonModal(): void {
+    this.reasonModal.hide();
   }
 }

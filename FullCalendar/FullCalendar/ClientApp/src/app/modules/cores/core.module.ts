@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { FullCalendarModule } from 'ng-fullcalendar';
         RouterModule,
         ReactiveFormsModule,
         HttpModule,
-        FullCalendarModule
+        FullCalendarModule,
+        ModalModule.forRoot(),
+        TabsModule.forRoot()
     ],
     exports: [
         CommonModule,
@@ -29,7 +33,9 @@ import { FullCalendarModule } from 'ng-fullcalendar';
         RouterModule,
         ReactiveFormsModule,
         HttpModule,
-        FullCalendarModule
+        FullCalendarModule,
+        ModalModule,
+        TabsModule
     ]
 })
 
